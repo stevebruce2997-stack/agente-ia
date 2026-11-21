@@ -1,0 +1,5 @@
+.venv_agente/
+.venv/
+.env
+__pycache__/
+.idea/
