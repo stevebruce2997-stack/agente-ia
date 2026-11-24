@@ -33,7 +33,6 @@ def inicio():
         
         if opcion == '1':
             nombre = pedir_texto("Ingrese su nombre: ")
-<<<<<<< HEAD
             menu_usuario(ticket_service, estimador, nombre) # Crea su ticket aquí
             # ENRUTAMIENTO DINÁMICO: Al terminar su ticket, le ofrecemos soporte
             if input("\n[Sistema] ¿Desea hablar con el Agente de Soporte Asignado? (s/n): ").lower() == 's':
@@ -64,20 +63,3 @@ def inicio():
 
 if __name__ == "__main__":
     inicio()
-=======
-            menu_usuario(ticket_service, estimador, nombre)
-        elif opcion == '2':
-            menu_trabajador(ticket_service, ia_service)
-        elif opcion == '3':
-            menu_lider(ticket_service)
-        elif opcion == '4':
-            menu_superusuario(ticket_service, estimador, ia_service, agente, evaluacion)
-        elif opcion == '5':
-            print("Saliendo del sistema...")
-            break
-        else:
-            print("Opción inválida. Intente nuevamente.")
-
-if __name__ == "__main__":
-    inicio()
->>>>>>> 8b77ee43d070678aa3d6e2b052f56603ac602308
