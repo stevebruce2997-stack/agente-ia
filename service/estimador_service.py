@@ -1,35 +1,32 @@
 class EstimadorService:
-    """Estima cuanto tardara un ticket usando el promedio de los tickets
-    ya resueltos (mismo calculo fecha_cierre - fecha_creacion)."""
+    """Estima cuánto tardará un ticket basándose en SLAs (Acuerdos de Nivel de Servicio)
+    para garantizar tiempos de respuesta profesionales, incluso sin historial."""
 
     def __init__(self, ticket_service):
         self.ticket_service = ticket_service
-
-    def _horas_resueltas(self, area=None, prioridad=None):
-        horas = []
-        for ticket in self.ticket_service.listar_tickets():
-            if ticket.estado == "Resuelto":
-                if area is None or ticket.area == area:
-                    if prioridad is None or ticket.prioridad == prioridad:
-                        horas.append(ticket.calcular_duracion_horas())
-        return horas
+        
+        # DEFINICIÓN DE SLAs (En horas estimadas de resolución máxima)
+        self.sla = {
+            "Critica": 1.0,  # 1 hora
+            "Alta": 4.0,     # 4 horas
+            "Media": 24.0,   # 24 horas
+            "Baja": 48.0     # 48 horas
+        }
 
     def estimar_horas(self, area, prioridad):
-        """Promedio de tickets con la misma area y prioridad.
-        Si no hay, usa el promedio general. Devuelve None si no hay datos."""
-        horas = self._horas_resueltas(area, prioridad)
-        if len(horas) == 0:
-            horas = self._horas_resueltas()
-        if len(horas) == 0:
-            return None
-        return sum(horas) / len(horas)
+        """Devuelve el SLA garantizado según la prioridad del ticket."""
+        # Si la prioridad existe en nuestro diccionario de SLA, devolvemos el valor.
+        # Si por alguna razón llega un dato extraño, garantizamos 24 horas (Media) por defecto.
+        return self.sla.get(prioridad, 24.0)
 
     def estimar_restante(self, ticket):
-        """Tiempo estimado menos el tiempo que ya paso (minimo cero)."""
+        """Tiempo del SLA menos el tiempo que ya pasó (mínimo cero)."""
         estimado = self.estimar_horas(ticket.area, ticket.prioridad)
-        if estimado is None:
-            return None
-        restante = estimado - ticket.calcular_duracion_horas()
+        
+        # Calculamos cuánto tiempo ha pasado desde que se creó el ticket
+        horas_pasadas = ticket.calcular_duracion_horas()
+        
+        restante = estimado - horas_pasadas
         if restante < 0:
             restante = 0
         return restante

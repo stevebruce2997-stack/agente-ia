@@ -1,0 +1,7 @@
+id_ticket,usuario,area,descripcion,prioridad,estado,solucion,fecha_creacion,fecha_cierre,clasificado_por
+1,bruce,Soporte Tecnico,se me apago mi laptop,Baja,Pendiente,,2026-11-23 17:18,,reglas
+2,bruce,Soporte Tecnico,mi computadora se apago mientras trabajaba algo urgente,Alta,Pendiente,,2026-11-23 17:36,,reglas
+3,bruce,Soporte Tecnico,mi laptop se malogro el mouse,Baja,Pendiente,,2026-11-23 17:41,,reglas
+4,bruce,Soporte Tecnico,mi laptop se apago y salio humo,Baja,Pendiente,,2026-11-23 17:46,,reglas
+5,bruce,Hardware,mi laptop cayo agua,Critica,Pendiente,,2026-11-23 18:04,,IA-Gemini
+6,bruce,Hardware,mi laptop salio chispas,Critica,Pendiente,,2026-11-24 00:33,,IA-Gemini
